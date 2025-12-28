@@ -2928,3 +2928,99 @@ class TopViewRS(ImageMCQDataset):
         score_file = eval_file.replace(f'.{suffix}', '_acc.csv')
         dump(acc, score_file)
         return acc
+
+
+class NewtPhys_SingleImage(ImageBaseDataset):
+    TYPE = 'MCQ'
+    DATASET_URL = {
+        'NewtPhys_SingleImage':
+        '/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa/NewtPhys_SingleImage.tsv',  # noqa
+        'NewtPhys_SingleImage_100':
+        '/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa/NewtPhys_SingleImage_100.tsv',  # noqa
+        'NewtPhys_MultiImage':
+        '/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa/NewtPhys_MultiImage.tsv' # noqa
+    }
+    DATASET_MD5 = {
+        'NewtPhys_SingleImage': '28c52a2316efb789f7522cd3c6672311',  # noqa
+        'NewtPhys_SingleImage_100': '7722dfdaeffc5bbfd818f6002cb4d14f',  # noqa
+        'NewtPhys_MultiImage': '3f0432fa784f61853d1b39da001a20ee',  # noqa
+    }
+
+    # we overwrite the init function to handle image field specially
+    def __init__(self, dataset='MMBench', skip_noimg=True):
+        ROOT = "/data0/sebastian.cavada/datasets/simulations_v3/dl3dv"
+        # You can override this variable to save image files to a different directory
+        self.dataset_name = dataset
+        self.img_root = ROOT
+
+        data = self.load_data(dataset)
+        self.skip_noimg = skip_noimg
+        if skip_noimg and 'image' in data:
+            data = data[~pd.isna(data['image'])]
+
+        data['index'] = [str(x) for x in data['index']]
+
+        self.meta_only = True
+
+        # The image field can store the base64 encoded image or another question index (for saving space)
+        if 'image' in data:
+            data['image'] = [str(x) for x in data['image']]
+            image_map = {x: y for x, y in zip(data['index'], data['image'])}
+            for k in image_map:
+                if len(image_map[k]) <= 64:
+                    idx = image_map[k]
+                    assert idx in image_map and len(image_map[idx]) > 64
+                    image_map[k] = image_map[idx]
+
+            images = [toliststr(image_map[k]) for k in data['index']]
+            data['image'] = [x[0] if len(x) == 1 else x for x in images]
+            self.meta_only = False
+
+        if 'image_path' in data:
+            paths = [toliststr(x) for x in data['image_path']]
+            data['image_path'] = [x[0] if len(x) == 1 else x for x in paths]
+
+        if np.all([istype(x, int) for x in data['index']]):
+            data['index'] = [int(x) for x in data['index']]
+
+        self.data = data
+        self.post_build(dataset)
+
+    def prepare_tsv(self, url, file_md5=None):
+        # data_root = "/data0/sebastian.cavada/datasets/simulations_v3/dl3dv"
+        data_root = "/home/cavadalab/Documents/scsv/papers/computational_physiscs/\
+            inria_version_3/VLMEvalKit-SebFork/vqa"
+        os.makedirs(data_root, exist_ok=True)
+        update_flag = False
+        file_name_legacy = url.split('/')[-1]
+        file_name = f"{self.dataset_name}.tsv"
+        data_path_legacy = osp.join(data_root, file_name_legacy)
+        data_path = osp.join(data_root, file_name)
+
+        self.data_path = data_path
+        if osp.exists(data_path):
+            if file_md5 is None or md5(data_path) == file_md5:
+                pass
+            else:
+                warnings.warn(f'The tsv file is in {data_root}, but the md5 does not match, will re-download')
+                download_file(url, data_path)
+                update_flag = True
+        else:
+            if osp.exists(data_path_legacy) and (file_md5 is None or md5(data_path_legacy) == file_md5):
+                warnings.warn(
+                    'Due to a modification in #1055, the local target file name has changed. '
+                    f'We detected the tsv file with legacy name {data_path_legacy} exists and will do the rename. '
+                )
+                import shutil
+                shutil.move(data_path_legacy, data_path)
+            else:
+                download_file(url, data_path)
+                update_flag = True
+
+        if file_size(data_path, 'GB') > 1:
+            local_path = data_path.replace('.tsv', '_local.tsv')
+            if not osp.exists(local_path) or os.environ.get('FORCE_LOCAL', None) or update_flag:
+                from ..tools import LOCALIZE
+                LOCALIZE(data_path, local_path)
+            data_path = local_path
+        return load(data_path)

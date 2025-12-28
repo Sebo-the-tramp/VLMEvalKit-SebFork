@@ -1,0 +1,160 @@
+LLM;name;open source;organization;params(B);multi-image
+InternVL2.5-78B;InternVL2_5-78B;Yes;Shanghai AI Lab,Tsinghua University;78.0;Yes
+Qwen2-VL-72B;Qwen2-VL-72B-Instruct;Yes;Alibaba;73.4;Yes
+InternVL2.5-38B;InternVL2_5-38B;Yes;Shanghai AI Lab,Tsinghua University;38.0;Yes
+InternVL2.5-26B;InternVL2_5-26B;Yes;Shanghai AI Lab,Tsinghua University;26.0;Yes
+Ovis1.6-Gemma2-27B;Ovis1.6-Gemma2-27B;Yes;Alibaba;28.9;Yes
+InternVL2-Llama3-76B;InternVL2-76B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;76.0;Yes
+InternVL2-40B;InternVL2-40B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;40.0;Yes
+Ovis1.6-Gemma2-9B;Ovis1.6-Gemma2-9B;Yes;Alibaba;10.2;Yes
+InternVL2.5-8B;InternVL2_5-8B;Yes;Shanghai AI Lab,Tsinghua University;8.0;Yes
+LLaVA-OneVision-72B;llava_onevision_qwen2_72b_ov;Yes;ByteDance;73.0;Yes
+Qwen2-VL-7B;Qwen2-VL-7B-Instruct;Yes;Alibaba;8.0;Yes
+InternVL2-26B;InternVL2-26B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;26.0;Yes
+MiniCPM-V-2.6;MiniCPM-V-2_6;Yes;OpenBMB;8.0;Yes
+InternVL2.5-4B;InternVL2_5-4B;Yes;Shanghai AI Lab,Tsinghua University;4.0;Yes
+InternVL2-8B-MPO-CoT;InternVL2-8B-MPO-CoT;Yes;Shanghai AI Lab,Tsinghua University;8.0;Yes
+InternVL2-8B-MPO;InternVL2-8B-MPO;Yes;Shanghai AI Lab,Tsinghua University;8.0;Yes
+InternVL2-8B;InternVL2-8B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;8.0;Yes
+Ovis1.5-Gemma2-9B;Ovis1.5-Gemma2-9B;Yes;Alibaba;11.4;Yes
+Aria;Aria;Yes;Rhymes AI;25.3;Yes
+Llama-3.2-90B-Vision-Instruct;Llama-3.2-90B-Vision-Instruct;Yes;Meta;88.6;Yes
+MMAlaya2;MMAlaya2;Yes;DataCanvas;26.0;Yes
+Ovis1.5-Llama3-8B;Ovis1.5-Llama3-8B;Yes;Alibaba;8.0;Yes
+InternVL-Chat-V1.5;InternVL-Chat-V1-5;Yes;Shanghai AI Lab;26.0;Yes
+Ovis1.6-Llama3.2-3B;Ovis1.6-Llama3.2-3B;Yes;Alibaba;4.1;Yes
+InternLM-XComposer2.5;XComposer2d5;Yes;Shanghai AI Lab;8.0;Yes
+Pixtral-12B;Pixtral-12B;Yes;Mistral AI;13.0;Yes
+InternVL2-4B;InternVL2-4B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;4.0;Yes
+LLaVA-OneVision-7B;llava_onevision_qwen2_7b_ov;Yes;ByteDance;8.0;Yes
+InternVL2.5-2B;InternVL2_5-2B;Yes;Shanghai AI Lab,Tsinghua University;2.0;Yes
+Aquila-VL-2B;Aquila-VL-2B;Yes;BAAI;2.2;Yes
+MiniCPM-Llama3-V2.5;MiniCPM-Llama3-V-2_5;Yes;OpenBMB;8.0;Yes
+VILA1.5-40B;VILA1.5-40b;Yes;Nvidia;40.0;Yes
+Llama-3.2-11B-Vision-Instruct;Llama-3.2-11B-Vision-Instruct;Yes;Meta;11.0;Yes
+Qwen2-VL-2B;Qwen2-VL-2B-Instruct;Yes;Alibaba;2.0;Yes
+Idefics3-8B-Llama3;Idefics3-8B-Llama3;Yes;HuggingFace;8.0;Yes
+Mini-InternVL-Chat-4B-V1.5;Mini-InternVL-Chat-4B-V1-5;Yes;Shanghai AI Lab;4.0;Yes
+XinYuan-VL-2B-Instruct;XinYuan-VL-2B-Instruct;Yes;Cylingo;2.0;Yes
+Eagle-X5-34B-Chat;Eagle-X5-34B-Chat;Yes;Nvidia;36.8;Yes
+LLaVA-Next-Yi-34B;llava_next_yi_34b;Yes;UW Madison;34.8;Yes
+LLaVA-CoT;LLaVA-CoT;Yes;Peking University;11.0;Yes
+InternVL2.5-1B;InternVL2_5-1B;Yes;Shanghai AI Lab,Tsinghua University;1.0;Yes
+InternVL2-2B;InternVL2-2B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;2.0;Yes
+H2OVL-2B;h2ovl-mississippi-2b;Yes;H2O.ai;2.2;Yes
+MiniMonkey;minimonkey;Yes;HUST;2.2;Yes
+Phi-3.5-Vision;Phi-3.5-Vision;Yes;Microsoft;4.0;Yes
+Vintern-3B-beta;Vintern-3B-beta;Yes;5th Civil Defender;3.7;Yes
+LLaVA-Next-Qwen-32B;llava_next_qwen_32b;Yes;ByteDance;33.0;Yes
+XGen-MM-Instruct-Interleave-v1.5;xgen-mm-phi3-interleave-r-v1.5;Yes;Salesforce;4.4;Yes
+Eagle-X5-13B;Eagle-X5-13B;Yes;Nvidia;15.0;Yes
+XGen-MM-Instruct-DPO-v1.5;xgen-mm-phi3-dpo-r-v1.5;Yes;Salesforce;4.4;Yes
+Mini-InternVL-Chat-2B-V1.5;Mini-InternVL-Chat-2B-V1-5;Yes;Shanghai AI Lab;2.0;Yes
+LLaVA-Next-Llama3;llava_next_llama3;Yes;ByteDance;8.0;Yes
+Yes;VILA1.5-13b;Yes;Nvidia;13.0;Yes
+Mantis-8B-Idefics2;Mantis-8B-Idefics2;Yes;TIGER Lab;8.0;Yes
+LLaVA-Next-Interleave-7B-DPO;llava_next_interleave_7b_dpo;Yes;ByteDance;8.0;Yes
+Monkey-Chat;monkey-chat;Yes;HUST;9.8;Yes
+InternVL2-1B;InternVL2-1B;Yes;Shanghai AI Lab,Tsinghua University,SenseTime;1.0;Yes
+LLaVA-Next-Vicuna-13B;llava_next_vicuna_13b;Yes;UW Madison;13.4;Yes
+LLaVA-Next-Interleave-7B;llava_next_interleave_7b;Yes;ByteDance;8.0;Yes
+Eagle-X5-7B;Eagle-X5-7B;Yes;Nvidia;9.0;Yes
+SmolVLM-Synthetic;SmolVLM-Synthetic;Yes;HuggingFace;2.3;Yes
+SmolVLM-Instruct;SmolVLM;Yes;HuggingFace;2.3;Yes
+DeepSeek-VL-7B;deepseek_vl_7b;Yes;DeepSeek;7.3;Yes
+LLaVA-Next-Mistral-7B;llava_next_mistral_7b;Yes;UW Madison;7.6;Yes
+LLaVA-LLaMA-3-8B;llava-llama-3-8b;Yes;ByteDance;8.0;Yes
+Qwen-VL-Chat;qwen_chat;Yes;Alibaba;9.6;Yes
+LLaVA-Next-Vicuna-7B;llava_next_vicuna_7b;Yes;UW Madison;7.1;Yes
+Slime-8B;Slime-8B;Yes;CASIA;8.0;Yes
+Llama-3-VILA1.5-8B;Llama-3-VILA1.5-8b;Yes;Nvidia;8.0;Yes
+Monkey;monkey;Yes;HUST;9.8;Yes
+H2OVL-800M;h2ovl-mississippi-1b;Yes;H2O.ai;0.8;Yes
+Mantis-8B-siglip-llama3;Mantis-8B-siglip-llama3;Yes;TIGER Lab;8.0;Yes
+LLaVA-OneVision-0.5B;llava_onevision_qwen2_0.5b_ov;Yes;ByteDance;1.0;Yes
+Vintern-1B-v2;Vintern-1B-v2;Yes;5th Civil Defender;3.7;Yes
+VILA1.5-3B;VILA1.5-3b;Yes;Nvidia;3.0;Yes
+Parrot-7B;Parrot;Yes;Alibaba;8.0;Yes
+Janus-1.3B;Janus-1.3B;Yes;DeepSeek;2.1;Yes
+DeepSeek-VL-1.3B;deepseek_vl_1.3b;Yes;DeepSeek;2.0;Yes
+Emu2_chat;emu2_chat;Yes;BAAI;37.0;Yes
+Mantis-8B-clip-llama3;Mantis-8B-clip-llama3;Yes;TIGER Lab;8.0;Yes
+Mantis-8B-Fuyu;Mantis-8B-Fuyu;Yes;TIGER Lab;8.0;Yes
+IDEFICS-80B-Instruct;idefics_80b_instruct;Yes;HuggingFace;80.0;Yes
+Qwen-VL;qwen_base;Yes;Alibaba;9.6;Yes
+IDEFICS-9B-Instruct;idefics_9b_instruct;Yes;HuggingFace;9.0;Yes
+Chameleon-30B;chameleon_30b;Yes;Meta;30.0;Yes
+OpenFlamingo v2;flamingov2;Yes;UW;9.0;Yes
+Chameleon-7B;chameleon_7b;Yes;Meta;7.0;Yes
+Kosmos2;Kosmos2;Yes;Microsoft;1.7;Yes
+LLaVA-Video-7B-Qwen2;llava_video_qwen2_7b;Yes;ByteDance;8.0;Yes
+LLaVA-Video-72B-Qwen2;llava_video_qwen2_72b;Yes;ByteDance;73.2;Yes
+Video-LLaVA;Video-LLaVA-7B;Yes;Peking University;7.5;Yes
+VideoChat2-HD;VideoChat2-HD;Yes;Shanghai AI Lab;7.0;Yes
+Chat-UniVi-7B;Chat-UniVi-7B;Yes;Peking University;7.0;Yes
+Chat-UniVi-7B-v1.5;Chat-UniVi-7B-v1.5;Yes;Peking University;7.0;Yes
+LLaMA-VID-7B;LLaMA-VID-7B;Yes;CUHK;7.0;Yes
+Video-ChatGPT;Video-ChatGPT;Yes;MBZUAI;7.0;Yes
+PLLaVA-7B;PLLaVA-7B;Yes;ByteDance;7.1;Yes
+PLLaVA-13B;PLLaVA-13B;Yes;ByteDance;13.5;Yes
+PLLaVA-34B;PLLaVA-34B;Yes;ByteDance;34.9;Yes
+SAIL-VL-2B;SAIL-VL-2B;Yes;ByteDance;2.1;Yes
+VARCO-VISION-14B;varco_vision_hf;Yes;NC Research;15.2;Yes
+Valley-Eagle;valley_eagle  ;Yes;ByteDance;8.9;Yes
+InternVL2.5-78B-MPO;InternVL2_5-78B-MPO;Yes;Shanghai AI Lab,Tsinghua University;78.0;Yes
+InternVL2.5-38B-MPO;InternVL2_5-38B-MPO;Yes;Shanghai AI Lab,Tsinghua University;38.0;Yes
+InternVL2.5-26B-MPO;InternVL2_5-26B-MPO;Yes;Shanghai AI Lab,Tsinghua University;26.0;Yes
+InternVL2.5-8B-MPO;InternVL2_5-8B-MPO;Yes;Shanghai AI Lab,Tsinghua University;8.0;Yes
+InternVL2.5-4B-MPO;InternVL2_5-4B-MPO;Yes;Shanghai AI Lab,Tsinghua University;4.0;Yes
+InternVL2.5-2B-MPO;InternVL2_5-2B-MPO;Yes;Shanghai AI Lab,Tsinghua University;2.0;Yes
+InternVL2.5-1B-MPO;InternVL2_5-1B-MPO;Yes;Shanghai AI Lab,Tsinghua University;1.0;Yes
+QVQ-72B-Preview;QVQ-72B-Preview;Yes;Alibaba;73.4;Yes
+VITA1.5;vita_qwen2;Yes;NJU;8.3;Yes
+VITA;vita;Yes;NJU;49.0;Yes
+DeepSeek-VL2-Tiny;deepseek_vl2_tiny;Yes;DeepSeek;3.4;Yes
+DeepSeek-VL2-Small;deepseek_vl2_small;Yes;DeepSeek;16.1;Yes
+DeepSeek-VL2;deepseek_vl2;Yes;DeepSeek;27.5;Yes
+Ross-Qwen2-7B;ross-qwen2-7b;Yes;CASIA;8.2;Yes
+MiniCPM-o-2.6;MiniCPM-o-2_6;Yes;OpenBMB;8.7;Yes
+Emu3_chat;emu3_chat;Yes;BAAI;8.5;Yes
+SmolVLM-256M;SmolVLM-256M;Yes;HuggingFace;0.3;Yes
+SmolVLM-500M;SmolVLM-500M;Yes;HuggingFace;0.5;Yes
+SenseNova;SenseChat-Vision;No;SenseTime;;Yes
+Taiyi;Taiyi;No;Megvii,StepFun;;Yes
+Step-1.5V;Step1V;No;StepFun;;Yes
+TeleMM;TeleMM;No;China Telecom;;Yes
+Gemini-1.5-Pro-002;GeminiPro1-5-002;No;Google;;Yes
+GPT-4o-20241120;GPT4o_20241120;No;OpenAI;;Yes
+GPT-4o-20240806;GPT4o_20240806;No;OpenAI;;Yes
+BailingMM-Lite-1203;bailingMM;No;AntGroup;21.0;Yes
+GLM-4v-Plus;GLM4V_PLUS;No;Zhipu;;Yes
+Claude 3.5 Sonnet 20241022;Claude3-5V_Sonnet_20241022;No;Anthropic;;Yes
+GPT-4o-20240513;GPT4o_HIGH;No;OpenAI;;Yes
+abab7-preview;abab7-preview;No;MiniMax;;Yes
+Gemini-1.5-Flash-002;GeminiFlash1-5-002;No;Google;;Yes
+JT-VL-Chat-V3.0;JTVL;No;China Mobile;;Yes
+Claude 3.5 Sonnet 20240620;Claude3-5V_Sonnet;No;Anthropic;;Yes
+BlueLM-V-3B;BlueLM_V;No;Vivo;3.0;Yes
+Qwen-VL-Max-0809;Qwen-VL-Max-0809;No;Alibaba;;Yes
+Qwen-VL-Plus-0809;Qwen-VL-Plus-0809;No;Alibaba;;Yes
+CongRong;CloudWalk;No;CloudWalk;;Yes
+Step-1.5V-mini;Step1.5V-mini;No;StepFun;;Yes
+Gemini-1.5-Pro;GeminiPro1-5;No;Google;;Yes
+GPT-4o-mini-20240718;GPT4o_MINI;No;OpenAI;;Yes
+Yi-Vision;Yi-Vision;No;01.AI;;Yes
+GPT-4v-20240409;GPT4V_20240409_HIGH;No;OpenAI;;Yes
+Gemini-1.5-Flash;GeminiFlash1-5;No;Google;;Yes
+GLM-4v;GLM4V;No;Zhipu;;Yes
+Qwen-VL-Max;QwenVLMax;No;Alibaba;;Yes
+GPT-4v-20231106;GPT4V;No;OpenAI;;Yes
+Gemini-1.0-Pro;GeminiPro1-0;No;Google;;Yes
+Claude3-Opus;Claude3V_Opus;No;Anthropic;;Yes
+Claude3-Sonnet;Claude3V_Sonnet;No;Anthropic;;Yes
+Qwen-VL-Plus;QwenVLPlus;No;Alibaba;;Yes
+Claude3-Haiku;Claude3V_Haiku;No;Anthropic;;Yes
+abab6.5s;abab6.5s;No;MiniMax;;Yes
+Hunyuan-Vision;Hunyuan-Vision;No;Tencent;;Yes
+HunYuan-Standard-Vision;HunYuan-Standard-Vision;No;Tencent;;Yes
+BailingMM-Pro-0120;BailingMM-Pro-0120;No;Alibaba;;Yes
+Doubao-1.5-Pro;DoubaoVL;No;ByteDance;;Yes
+GLM-4v-Plus-20250111;GLM4V_PLUS_20250111;No;Zhipu;;Yes

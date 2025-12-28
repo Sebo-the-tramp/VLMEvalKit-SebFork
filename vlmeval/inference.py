@@ -164,6 +164,9 @@ def infer_data(model, model_name, work_dir, dataset, out_file, verbose=False, ap
                 warnings.warn(f'{type(err)} {str(err)}')
                 response = f'{FAIL_MSG}: {type(err)} {str(err)}'
         else:
+            if (verbose):
+                print(f'Processing index {idx}', flush=True)
+                print(f'Prompt: {struct}', flush=True)
             response = model.generate(message=struct, dataset=dataset_name)
         torch.cuda.empty_cache()
 
