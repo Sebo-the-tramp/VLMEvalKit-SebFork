@@ -9,7 +9,7 @@ from itertools import combinations
 from datetime import datetime, timedelta
 
 # Defaults that can be overridden via CLI flags
-DATASET = '/mnt/proj1/eu-25-92/tiny_vqa_creation/output'
+DATASET = 'NewtPhys_MultiImage'
 SPLIT = 'val'
 GPUS = list(range(8))                    # physical GPU indices to use
 GPU_MB = [40960] * len(GPUS)             # per-GPU VRAM in MiB (edit if heterogeneous)
@@ -180,14 +180,11 @@ def make_cmd(job, run_name, dataset, split):
         _extend_flag(base, '--data', data)
         _extend_flag(base, '--model', job['model'])
     else:
-        if run_name is None:
-            raise ValueError("run_name must be provided to make_cmd")
         base = [
-            'python', 'eval/test_benchmark.py',
-            '--model_name', job['model'],
-            '--dataset_path', dataset,
-            '--split', split,
-            '--run_name', f"{run_name}"
+            'python', 'run.py',
+            '--data', dataset,
+            '--model', job['model'],
+            '--verbose'
         ]
 
     if job.get('extra'):
@@ -394,7 +391,11 @@ def main():
     parser.add_argument('--run-name', required=True, help='Base run name, e.g. run_07_general')
     parser.add_argument('--quantity', required=True, help='Quantity tag, e.g. 10K or 1K')
     parser.add_argument('--model-size', choices=JOB_SETS.keys(), default='big', help='Model group to evaluate')
-    parser.add_argument('--dataset-path', default=DATASET, help='Dataset path (default matches repo setting)')
+    parser.add_argument(
+        '--dataset', '--dataset-name', '--dataset-path',
+        dest='dataset',
+        default=DATASET,
+        help='Dataset name passed to run.py (e.g. NewtPhys_MultiImage)')
     parser.add_argument('--split', default=SPLIT, help='Dataset split (default: val)')
     args = parser.parse_args()
 
@@ -405,7 +406,7 @@ def main():
         run_name=run_name_and_path,
         jobs=config['jobs'],
         cpu_per_job=config['cpu_per_job'],
-        dataset=args.dataset_path,
+        dataset=args.dataset,
         split=args.split,
     )
 
