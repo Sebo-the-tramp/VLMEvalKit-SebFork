@@ -2938,7 +2938,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
         'NewtPhys_SingleImage_100':
         '/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa/NewtPhys_SingleImage_100.tsv',  # noqa
         'NewtPhys_MultiImage':
-        '/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa/NewtPhys_MultiImage.tsv' # noqa
+        '/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_11_general/test_run_11_general_10K.tsv' # noqa
     }
     DATASET_MD5 = {
         'NewtPhys_SingleImage': '28c52a2316efb789f7522cd3c6672311',  # noqa
