@@ -2999,6 +2999,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
         data_path = osp.join(data_root, file_name)
 
         self.data_path = data_path
+        print("DATA path checking")
         if osp.exists(data_path):
             if file_md5 is None or md5(data_path) == file_md5:
                 pass
