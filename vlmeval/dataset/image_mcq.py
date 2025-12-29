@@ -2948,7 +2948,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
 
     # we overwrite the init function to handle image field specially
     def __init__(self, dataset='MMBench', skip_noimg=True):
-        ROOT = "/data0/sebastian.cavada/datasets/simulations_v3/dl3dv"
+        ROOT = "/data0/sebastian.cavada/datasets/simulations_v4/dl3dv"
         # You can override this variable to save image files to a different directory
         self.dataset_name = dataset
         self.img_root = ROOT
@@ -3002,6 +3002,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
         print("DATA path checking", data_path)
         if osp.exists(data_path):
             if file_md5 is None or md5(data_path) == file_md5:
+                print("Data path exists and is valid:", data_path)
                 pass
             else:
                 warnings.warn(f'The tsv file is in {data_root}, but the md5 does not match, will re-download')
