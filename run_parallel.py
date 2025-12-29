@@ -83,7 +83,33 @@ JOB_SETS = {
     'VLMEval': {
         'cpu_per_job': 12,
         'jobs': [
+            # --- The Reasoning & CoT Specialists (Critical for Physics) ---
+            {'model': 'QVQ-72B-Preview', 'g': 4, 'mb': 288000, 'mode': 'general', 'size': 'large'},
+            {'model': 'InternVL2-8B-MPO-CoT', 'g': 1, 'mb': 32000, 'mode': 'general', 'size': 'small'},
+            {'model': 'Qwen2-VL-72B-Instruct', 'g': 4, 'mb': 288000, 'mode': 'general', 'size': 'large'},
+            {'model': 'Phi-3.5-Vision', 'g': 1, 'mb': 18000, 'mode': 'general', 'size': 'small'},
 
+            # --- The Heavyweight SOTA Baselines ---
+            {'model': 'InternVL2_5-78B', 'g': 4, 'mb': 312000, 'mode': 'general', 'size': 'large'},
+            {'model': 'Llama-3.2-90B-Vision-Instruct', 'g': 8, 'mb': 360000, 'mode': 'general', 'size': 'large'},
+            {'model': 'llava_onevision_qwen2_72b_ov', 'g': 4, 'mb': 288000, 'mode': 'general', 'size': 'large'},
+            {'model': 'InternVL2-76B', 'g': 4, 'mb': 304000, 'mode': 'general', 'size': 'large'},
+
+            # --- Strong Mid-Sized & Efficient Models ---
+            {'model': 'InternVL2_5-26B', 'g': 2, 'mb': 104000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Ovis1.6-Gemma2-27B', 'g': 2, 'mb': 108000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Aria', 'g': 2, 'mb': 100000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Eagle-X5-34B-Chat', 'g': 2, 'mb': 136000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'InternVL2-40B', 'g': 2, 'mb': 160000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'VILA1.5-40b', 'g': 2, 'mb': 160000, 'mode': 'general', 'size': 'medium'},
+
+            # --- High-Resolution & Small Specialists ---
+            {'model': 'MiniCPM-V-2_6', 'g': 1, 'mb': 32000, 'mode': 'general', 'size': 'small'},
+            {'model': 'Llama-3.2-11B-Vision-Instruct', 'g': 1, 'mb': 44000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Pixtral-12B', 'g': 1, 'mb': 48000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Idefics3-8B-Llama3', 'g': 1, 'mb': 32000, 'mode': 'general', 'size': 'small'},
+            {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 64000, 'mode': 'general', 'size': 'medium'},
+            {'model': 'Qwen2-VL-7B-Instruct', 'g': 1, 'mb': 28000, 'mode': 'general', 'size': 'small'},
         ]
     }
 }
