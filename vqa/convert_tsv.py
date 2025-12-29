@@ -6,7 +6,6 @@ import csv
 import json
 from pathlib import Path
 
-from vlmeval.smp.vlm import encode_image_file_to_base64
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -56,7 +55,8 @@ def main():
 
     with open(json_path_question, "r", encoding="utf-8") as handle:
         records = json.load(handle)
-        records = [record for record in records if record["mode"] == args.mode]
+        if args.mode is not None:
+            records = [record for record in records if record["mode"] == args.mode]
         print(f"Loaded {len(records)} records from {json_path_question}")
 
     # print(records)
