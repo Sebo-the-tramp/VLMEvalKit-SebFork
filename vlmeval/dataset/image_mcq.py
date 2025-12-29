@@ -2948,7 +2948,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
 
     # we overwrite the init function to handle image field specially
     def __init__(self, dataset='MMBench', skip_noimg=True):
-        ROOT = "/data0/sebastian.cavada/datasets/simulations_v4/dl3dv"
+        ROOT = "/scratch/project/eu-25-92/composite_physics/dataset/simulation_v4/dl3dv"
         # You can override this variable to save image files to a different directory
         self.dataset_name = dataset
         self.img_root = ROOT
