@@ -2990,7 +2990,7 @@ class NewtPhys_SingleImage(ImageBaseDataset):
         # data_root = "/data0/sebastian.cavada/datasets/simulations_v3/dl3dv"
         # data_root = "/home/cavadalab/Documents/scsv/papers/computational_physiscs/\
         #     inria_version_3/VLMEvalKit-SebFork/vqa"
-        data_root = "/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_general_11/"
+        data_root = "/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_11_general/"
         os.makedirs(data_root, exist_ok=True)
         update_flag = False
         file_name_legacy = url.split('/')[-1]
