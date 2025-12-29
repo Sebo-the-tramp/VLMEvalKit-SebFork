@@ -3005,10 +3005,12 @@ class NewtPhys_SingleImage(ImageBaseDataset):
                 print("Data path exists and is valid:", data_path)
                 pass
             else:
+                print("Data path exists and is NOT VALID:", data_path)
                 warnings.warn(f'The tsv file is in {data_root}, but the md5 does not match, will re-download')
                 download_file(url, data_path)
                 update_flag = True
         else:
+            print("Data path does not exist:", data_path)
             if osp.exists(data_path_legacy) and (file_md5 is None or md5(data_path_legacy) == file_md5):
                 warnings.warn(
                     'Due to a modification in #1055, the local target file name has changed. '
