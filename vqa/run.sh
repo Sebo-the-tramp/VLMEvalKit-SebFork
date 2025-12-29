@@ -11,4 +11,5 @@ RUN_NAME="run_11_general"
 QUANTITY="10K"
 
 python convert_tsv.py ${OUTPUT_PATH}/${RUN_NAME}/test_${RUN_NAME}_${QUANTITY}.json ./test.tsv \
+    --output-dir ${OUTPUT_PATH}/${RUN_NAME} \
     --image-root ${IMAGE_ROOT}
