@@ -83,7 +83,7 @@ JOB_SETS = {
     'VLMEval': {
         'cpu_per_job': 12,
         'jobs': [
-            
+
         ]
     }
 }
