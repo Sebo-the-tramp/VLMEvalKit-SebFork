@@ -90,11 +90,11 @@ JOB_SETS = {
             {'model': 'QVQ-72B-Preview', 'g': 4, 'mb': 160000, 'mode': 'general', 'size': 'large'},
             
             # "MPO-CoT" indicates specific fine-tuning for Chain-of-Thought paths.
-            {'model': 'InternVL2-8B-MPO-CoT', 'g': 1, 'mb': 24000, 'mode': 'general', 'size': 'small'},
+            # {'model': 'InternVL2-8B-MPO-CoT', 'g': 1, 'mb': 24000, 'mode': 'general', 'size': 'small'},
 
             # --- 2. The SOTA Giants (Baselines) ---
             # The current open-source King. Good at Charts/Diagrams.
-            {'model': 'Qwen2-VL-72B-Instruct', 'g': 4, 'mb': 160000, 'mode': 'general', 'size': 'large'},
+            # {'model': 'Qwen2-VL-72B-Instruct', 'g': 4, 'mb': 160000, 'mode': 'general', 'size': 'large'},
             
             # Newest InternVL. 78B is massive; 156GB weights. Needs 5x40GB to be safe.
             {'model': 'InternVL2_5-78B', 'g': 5, 'mb': 180000, 'mode': 'general', 'size': 'large'},
@@ -103,11 +103,11 @@ JOB_SETS = {
             {'model': 'Llama-3.2-90B-Vision-Instruct', 'g': 6, 'mb': 200000, 'mode': 'general', 'size': 'large'},
             
             # ByteDance's OneVision. Strong multi-image capabilities (e.g., sequence of events).
-            {'model': 'llava_onevision_qwen2_72b_ov', 'g': 4, 'mb': 160000, 'mode': 'general', 'size': 'large'},
+            # {'model': 'llava_onevision_qwen2_72b_ov', 'g': 4, 'mb': 160000, 'mode': 'general', 'size': 'large'},
 
             # --- 3. Mid-Size Specialists (The Sweet Spot) ---
             # Ovis has a unique "structural" visual embedding. Good for spatial relations.
-            {'model': 'Ovis1.6-Gemma2-27B', 'g': 2, 'mb': 65000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'Ovis1.6-Gemma2-27B', 'g': 2, 'mb': 65000, 'mode': 'general', 'size': 'medium'},
             
             # InternVL 2.5 Medium. 26B fits easily on 2 cards.
             {'model': 'InternVL2_5-26B', 'g': 2, 'mb': 60000, 'mode': 'general', 'size': 'medium'},
@@ -139,7 +139,7 @@ JOB_SETS = {
             {'model': 'Qwen2-VL-7B-Instruct', 'g': 1, 'mb': 18000, 'mode': 'general', 'size': 'small'},
             
             # DeepSeek V2 Small (16B). Fits on 1 card (32GB weights).
-            {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium', 'uv': ['transformers==4.47.1']},
+            # {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium', 'uv': ['transformers==4.47.1']},
 
             {'model': 'Moondream2', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium'},
 
