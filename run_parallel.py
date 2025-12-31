@@ -141,7 +141,7 @@ JOB_SETS = {
             # DeepSeek V2 Small (16B). Fits on 1 card (32GB weights).
             # {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium', 'uv': ['transformers==4.47.1']},
 
-            {'model': 'Moondream2', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'Moondream2', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium'},
 
             # Good upgrade from standard LLaVA.
             # {'model': 'Idefics3-8B-Llama3', 'g': 1, 'mb': 20000, 'mode': 'general', 'size': 'small'},
