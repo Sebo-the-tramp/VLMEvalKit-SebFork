@@ -8,6 +8,8 @@ import re
 from itertools import combinations
 from datetime import datetime, timedelta
 
+from vlmeval.vlm.moondream import Moondream2
+
 # Defaults that can be overridden via CLI flags
 DATASET = 'NewtPhys_MultiImage'
 SPLIT = 'val'
@@ -111,39 +113,41 @@ JOB_SETS = {
             {'model': 'InternVL2_5-26B', 'g': 2, 'mb': 60000, 'mode': 'general', 'size': 'medium'},
             
             # Mixture-of-Experts (MoE) model. Often punches above its weight in logic.
-            {'model': 'Aria', 'g': 2, 'mb': 60000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'Aria', 'g': 2, 'mb': 60000, 'mode': 'general', 'size': 'medium'},
             
             # 40B models are tricky. 80GB weights. 2 cards is risky, 3 is safe.
-            {'model': 'InternVL2-40B', 'g': 3, 'mb': 90000, 'mode': 'general', 'size': 'medium'},
-            {'model': 'VILA1.5-40b', 'g': 3, 'mb': 90000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'InternVL2-40B', 'g': 3, 'mb': 90000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'VILA1.5-40b', 'g': 3, 'mb': 90000, 'mode': 'general', 'size': 'medium'},
             
             # NVIDIA's Eagle. Strong Chat capabilities.
-            {'model': 'Eagle-X5-34B-Chat', 'g': 2, 'mb': 75000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'Eagle-X5-34B-Chat', 'g': 2, 'mb': 75000, 'mode': 'general', 'size': 'medium'},
             
             # Another 38B option from the new 2.5 series.
-            {'model': 'InternVL2_5-38B', 'g': 3, 'mb': 85000, 'mode': 'general', 'size': 'medium'},
+            # {'model': 'InternVL2_5-38B', 'g': 3, 'mb': 85000, 'mode': 'general', 'size': 'medium'},
 
             # --- 4. Small & High-Resolution Specialists ---
             # MiniCPM is famous for "seeing" small details (high-res OCR) efficiently.
-            {'model': 'MiniCPM-V-2_6', 'g': 1, 'mb': 20000, 'mode': 'general', 'size': 'small'},
+            # {'model': 'MiniCPM-V-2_6', 'g': 1, 'mb': 20000, 'mode': 'general', 'size': 'small'},
             
             # Meta's smaller distilled model.
-            {'model': 'Llama-3.2-11B-Vision-Instruct', 'g': 1, 'mb': 26000, 'mode': 'general', 'size': 'small'},
+            {'model': 'Llama-3.2-11B-Vision-Instruct', 'g': 1, 'mb': 16000, 'mode': 'general', 'size': 'small'},
             
             # Mistral's first vision model.
-            {'model': 'Pixtral-12B', 'g': 1, 'mb': 28000, 'mode': 'general', 'size': 'small'},
+            # {'model': 'Pixtral-12B', 'g': 1, 'mb': 28000, 'mode': 'general', 'size': 'small'},
             
             # Standard 7B baseline.
             {'model': 'Qwen2-VL-7B-Instruct', 'g': 1, 'mb': 18000, 'mode': 'general', 'size': 'small'},
             
             # DeepSeek V2 Small (16B). Fits on 1 card (32GB weights).
-            {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium'},
-            
+            {'model': 'deepseek_vl2_small', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium', 'uv': ['transformers==4.47.1']},
+
+            {'model': 'Moondream2', 'g': 1, 'mb': 38000, 'mode': 'general', 'size': 'medium'},
+
             # Good upgrade from standard LLaVA.
-            {'model': 'Idefics3-8B-Llama3', 'g': 1, 'mb': 20000, 'mode': 'general', 'size': 'small'},
+            # {'model': 'Idefics3-8B-Llama3', 'g': 1, 'mb': 20000, 'mode': 'general', 'size': 'small'},
             
             # Microsoft's Phi-3.5. Very strong logic for its tiny size.
-            {'model': 'Phi-3.5-Vision', 'g': 1, 'mb': 12000, 'mode': 'general', 'size': 'small'}
+            # {'model': 'Phi-3.5-Vision', 'g': 1, 'mb': 12000, 'mode': 'general', 'size': 'small'}
         ]
     }
 }
