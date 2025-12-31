@@ -13,8 +13,7 @@ from vlmeval.vlm.moondream import Moondream2
 # Defaults that can be overridden via CLI flags
 DATASET = 'NewtPhys_MultiImage'
 SPLIT = 'val'
-GPUS = list(range(8))                    # physical GPU indices to use
-GPU_MB = [40960] * len(GPUS)             # per-GPU VRAM in MiB (edit if heterogeneous)
+DEFAULT_GPU_MEM_MB = 40960               # fallback VRAM per GPU if probing fails
 
 JOB_SETS = {
     'big': {
@@ -153,6 +152,81 @@ JOB_SETS = {
 }
 
 
+def _parse_int_sequence(spec, allow_ranges=True):
+    """Parse comma/space-separated integers, optionally supporting a-b ranges."""
+    tokens = re.split(r'[,\s]+', spec.strip())
+    values = []
+    for token in tokens:
+        if not token:
+            continue
+        if allow_ranges and '-' in token:
+            start, end = token.split('-', 1)
+            start_i, end_i = int(start), int(end)
+            step = 1 if start_i <= end_i else -1
+            values.extend(range(start_i, end_i + step, step))
+        else:
+            values.append(int(token))
+    if not values:
+        raise ValueError(f"Could not parse any integers from '{spec}'")
+    return values
+
+
+def detect_gpu_ids(cli_value=None):
+    """Resolve the list of GPU indices to schedule jobs on."""
+    if cli_value:
+        return _parse_int_sequence(cli_value)
+
+    env_value = os.environ.get('CUDA_VISIBLE_DEVICES')
+    if env_value:
+        return _parse_int_sequence(env_value)
+
+    try:
+        out = subprocess.check_output(
+            ['nvidia-smi', '--query-gpu=index', '--format=csv,noheader'],
+            text=True
+        )
+        ids = [int(line.strip()) for line in out.splitlines() if line.strip()]
+        if ids:
+            return ids
+    except Exception:
+        pass
+
+    # Fallback to a conservative single device if detection fails.
+    return [0]
+
+
+def resolve_gpu_memory(gpu_ids, cli_value=None):
+    """Return per-GPU VRAM budgets aligned with gpu_ids."""
+    if cli_value:
+        user_vals = _parse_int_sequence(cli_value, allow_ranges=False)
+        if len(user_vals) == 1 and len(gpu_ids) > 1:
+            return user_vals * len(gpu_ids)
+        if len(user_vals) != len(gpu_ids):
+            raise ValueError(
+                f"--gpu-mem needs {len(gpu_ids)} entries, received {len(user_vals)}"
+            )
+        return user_vals
+
+    try:
+        out = subprocess.check_output(
+            ['nvidia-smi', '--query-gpu=index,memory.total', '--format=csv,noheader,nounits'],
+            text=True
+        )
+        mem_map = {}
+        for line in out.splitlines():
+            if not line.strip():
+                continue
+            idx_str, mem_str = [piece.strip() for piece in line.split(',')]
+            mem_map[int(idx_str)] = int(float(mem_str))
+        resolved = [mem_map.get(gpu, DEFAULT_GPU_MEM_MB) for gpu in gpu_ids]
+        if resolved:
+            return resolved
+    except Exception:
+        pass
+
+    return [DEFAULT_GPU_MEM_MB] * len(gpu_ids)
+
+
 def pick_cpus(free_set, n):
     """Pick n free logical CPUs, or None if not enough."""
     if len(free_set) < n:
@@ -216,7 +290,7 @@ def pick(free, k, need):
     return list(best) if best else None
 
 
-def run_one_experiment(run_name, jobs, cpu_per_job, dataset, split):
+def run_one_experiment(run_name, jobs, cpu_per_job, dataset, split, gpu_ids, gpu_mem, disable_cpu_affinity=False):
     logs = pathlib.Path('logs')
     logs.mkdir(exist_ok=True)
     summary_stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -234,16 +308,21 @@ def run_one_experiment(run_name, jobs, cpu_per_job, dataset, split):
     log(f"Starting experiment with run name: {run_name}")
     log(f"Summary log: {summary_log_path}")
     log()
-    free = GPU_MB[:]          # remaining MiB per GPU
+    free = gpu_mem[:]         # remaining MiB per GPU
     cpu_ids = list(range(os.cpu_count() or 1))
     cpu_free = set(cpu_ids)   # remaining free logical CPUs
     running = []
     completed_jobs = []       # track completed jobs with timing
     overall_start_time = datetime.now()
+    log(f"Using GPUs: {gpu_ids}")
+    log(f"Per-GPU VRAM budgets (MiB): {gpu_mem}")
+    log(f"Logical CPUs available: {len(cpu_ids)} | CPU per job target: {cpu_per_job}")
 
     # largest first: big per-GPU mem first, tie break by jobs that need more GPUs
     JOBS = [job.copy() for job in jobs]
     JOBS.sort(key=lambda j: (j['mb'], j['g']), reverse=True)
+
+    cpu_warning_emitted = False
 
     while JOBS or running:
         # reclaim finished
@@ -280,13 +359,18 @@ def run_one_experiment(run_name, jobs, cpu_per_job, dataset, split):
                 i += 1
                 continue
             # choose CPUs for this job
-            cpus = pick_cpus(cpu_free, cpu_per_job)
-            if not cpus:
-                i += 1
-                continue
+            cpus = []
+            if not disable_cpu_affinity and cpu_per_job > 0:
+                maybe_cpus = pick_cpus(cpu_free, cpu_per_job)
+                if maybe_cpus is None:
+                    if not cpu_warning_emitted:
+                        log("Insufficient free CPUs to honor taskset request; running without pinning.")
+                        cpu_warning_emitted = True
+                else:
+                    cpus = maybe_cpus
             env = os.environ.copy()
             env['PYTHONPATH'] = './'
-            env['CUDA_VISIBLE_DEVICES'] = ','.join(str(GPUS[d]) for d in devs)
+            env['CUDA_VISIBLE_DEVICES'] = ','.join(str(gpu_ids[d]) for d in devs)
 
             cmd = make_cmd(job, run_name=run_name, dataset=dataset, split=split)
             log("running the command: " + ' '.join(cmd))
@@ -295,7 +379,7 @@ def run_one_experiment(run_name, jobs, cpu_per_job, dataset, split):
 
             start_time = datetime.now()
             log(f'Starting: {job["model"]} at {start_time.strftime("%H:%M:%S")} on GPUs {env["CUDA_VISIBLE_DEVICES"]}')
-            final_cmd = ['taskset', '-c', ','.join(map(str, cpus))] + cmd
+            final_cmd = ['taskset', '-c', ','.join(map(str, cpus))] + cmd if cpus else cmd
 
             p = subprocess.Popen(final_cmd, stdout=logf, stderr=subprocess.STDOUT, env=env)
             for d in devs:
@@ -401,17 +485,45 @@ def main():
         default=DATASET,
         help='Dataset name passed to run.py (e.g. NewtPhys_MultiImage)')
     parser.add_argument('--split', default=SPLIT, help='Dataset split (default: val)')
+    parser.add_argument(
+        '--gpus',
+        type=str,
+        default=None,
+        help='Comma/space separated GPU indices to use (default: CUDA_VISIBLE_DEVICES or detected GPUs)')
+    parser.add_argument(
+        '--gpu-mem',
+        type=str,
+        default=None,
+        help='VRAM budget per GPU in MiB; provide one value or a list matching --gpus')
+    parser.add_argument(
+        '--cpu-per-job',
+        type=int,
+        default=None,
+        help='Override CPU cores requested per job (default comes from the chosen job set)')
+    parser.add_argument(
+        '--disable-cpu-affinity',
+        action='store_true',
+        help='Skip taskset CPU pinning even when enough cores are free')
     args = parser.parse_args()
 
     config = JOB_SETS[args.model_size]
+    gpu_ids = detect_gpu_ids(args.gpus)
+    try:
+        gpu_mem = resolve_gpu_memory(gpu_ids, args.gpu_mem)
+    except ValueError as exc:
+        parser.error(str(exc))
+    cpu_per_job = args.cpu_per_job if args.cpu_per_job is not None else config['cpu_per_job']
     run_name_and_path = build_run_name(args.run_name, args.quantity)
 
     run_one_experiment(
         run_name=run_name_and_path,
         jobs=config['jobs'],
-        cpu_per_job=config['cpu_per_job'],
+        cpu_per_job=cpu_per_job,
         dataset=args.dataset,
         split=args.split,
+        gpu_ids=gpu_ids,
+        gpu_mem=gpu_mem,
+        disable_cpu_affinity=args.disable_cpu_affinity,
     )
 
 
