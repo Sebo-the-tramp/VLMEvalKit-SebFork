@@ -2941,14 +2941,13 @@ class NewtPhys_SingleImage(ImageBaseDataset):
         '/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_11_general/test_run_11_general_10K.tsv' # noqa
     }
     DATASET_MD5 = {
-        'NewtPhys_SingleImage': '28c52a2316efb789f7522cd3c6672311',  # noqa
-        'NewtPhys_SingleImage_100': '7722dfdaeffc5bbfd818f6002cb4d14f',  # noqa
-        'NewtPhys_MultiImage': '7d706dc597763a33783db4761b8f2b06',  # noqa
+        # better for testing
     }
 
     # we overwrite the init function to handle image field specially
     def __init__(self, dataset='MMBench', skip_noimg=True):
-        ROOT = "/scratch/project/eu-25-92/composite_physics/dataset/simulation_v4/dl3dv"
+        # ROOT = "/scratch/project/eu-25-92/composite_physics/dataset/simulation_v4/dl3dv"
+        ROOT = "/data0/sebastian.cavada/datasets/simulations_v4/dl3dv"  # noqa
         # You can override this variable to save image files to a different directory
         self.dataset_name = dataset
         self.img_root = ROOT
@@ -2988,9 +2987,8 @@ class NewtPhys_SingleImage(ImageBaseDataset):
 
     def prepare_tsv(self, url, file_md5=None):
         # data_root = "/data0/sebastian.cavada/datasets/simulations_v3/dl3dv"
-        # data_root = "/home/cavadalab/Documents/scsv/papers/computational_physiscs/\
-        #     inria_version_3/VLMEvalKit-SebFork/vqa"
-        data_root = "/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_11_general/"
+        data_root = "/home/cavadalab/Documents/scsv/papers/computational_physiscs/inria_version_3/VLMEvalKit-SebFork/vqa"
+        # data_root = "/mnt/proj1/eu-25-92/tiny_vqa_creation/output/run_11_general/"
         os.makedirs(data_root, exist_ok=True)
         update_flag = False
         file_name_legacy = url.split('/')[-1]
